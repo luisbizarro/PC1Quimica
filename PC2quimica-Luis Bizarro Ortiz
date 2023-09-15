@@ -1,0 +1,1034 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "widgets": {
+      "application/vnd.jupyter.widget-state+json": {
+        "f534de799b644da78a26101835ae8196": {
+          "model_module": "faerun-notebook",
+          "model_name": "SmilesDrawerModel",
+          "model_module_version": "^0.1.5",
+          "state": {
+            "_dom_classes": [],
+            "_model_module": "faerun-notebook",
+            "_model_module_version": "^0.1.5",
+            "_model_name": "SmilesDrawerModel",
+            "_view_count": null,
+            "_view_module": "faerun-notebook",
+            "_view_module_version": "^0.1.5",
+            "_view_name": "SmilesDrawerView",
+            "background": "#1e1e1e",
+            "border": true,
+            "layout": "IPY_MODEL_84fdd4dbf5294e09b28a6da52c6edb8b",
+            "options": {
+              "scale": 1.25
+            },
+            "output": "svg",
+            "theme": "dark",
+            "value": [
+              [
+                "Rxn",
+                "CC=CC.O=O>>C(=O)=O.O"
+              ]
+            ]
+          }
+        },
+        "84fdd4dbf5294e09b28a6da52c6edb8b": {
+          "model_module": "@jupyter-widgets/base",
+          "model_name": "LayoutModel",
+          "model_module_version": "1.2.0",
+          "state": {
+            "_model_module": "@jupyter-widgets/base",
+            "_model_module_version": "1.2.0",
+            "_model_name": "LayoutModel",
+            "_view_count": null,
+            "_view_module": "@jupyter-widgets/base",
+            "_view_module_version": "1.2.0",
+            "_view_name": "LayoutView",
+            "align_content": null,
+            "align_items": null,
+            "align_self": null,
+            "border": null,
+            "bottom": null,
+            "display": null,
+            "flex": null,
+            "flex_flow": null,
+            "grid_area": null,
+            "grid_auto_columns": null,
+            "grid_auto_flow": null,
+            "grid_auto_rows": null,
+            "grid_column": null,
+            "grid_gap": null,
+            "grid_row": null,
+            "grid_template_areas": null,
+            "grid_template_columns": null,
+            "grid_template_rows": null,
+            "height": null,
+            "justify_content": null,
+            "justify_items": null,
+            "left": null,
+            "margin": null,
+            "max_height": null,
+            "max_width": null,
+            "min_height": null,
+            "min_width": null,
+            "object_fit": null,
+            "object_position": null,
+            "order": null,
+            "overflow": null,
+            "overflow_x": null,
+            "overflow_y": null,
+            "padding": null,
+            "right": null,
+            "top": null,
+            "visibility": null,
+            "width": null
+          }
+        }
+      }
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/luisbizarro/PC1Quimica/blob/main/PC2quimica-Luis%20Bizarro%20Ortiz\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "$$\\Large \\textit{UNMSM | Química}$$\n",
+        "$$\\large \\textbf{PC Nº2 | Materia y clasificación}$$\n",
+        "\n",
+        "_Profesor: Jesus Alvarado Huayhuaz_"
+      ],
+      "metadata": {
+        "id": "sDJAjbaQOj4x"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Todas las indicaciones para la presentación de la práctica son explicadas en clase y brindadas en el material de enunciado de preguntas en formato PDF."
+      ],
+      "metadata": {
+        "id": "_DsTzWLoP7Fy"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Pregunta 1: DataFrames y listas en python (4 puntos)"
+      ],
+      "metadata": {
+        "id": "obD7c2igOD6t"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Usando PeriodicTable, crea una tabla con 20 elementos químicos y en las columnas considera: nombre, simbolo, masa_atomica, numero_atomico\ty valencias. Puedes ayudarte del siguiente [material](https://github.com/inefable12/UNMSM_quimica_2023/blob/main/Python_para_quimica_2023.ipynb)."
+      ],
+      "metadata": {
+        "id": "gV4WKDa72eez"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "pip install rdkit\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sWT3lFxvWdZC",
+        "outputId": "faa7689f-07cc-4158-b326-0e64f58f6eeb"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting rdkit\n",
+            "  Downloading rdkit-2023.3.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (29.7 MB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m29.7/29.7 MB\u001b[0m \u001b[31m40.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from rdkit) (1.23.5)\n",
+            "Requirement already satisfied: Pillow in /usr/local/lib/python3.10/dist-packages (from rdkit) (9.4.0)\n",
+            "Installing collected packages: rdkit\n",
+            "Successfully installed rdkit-2023.3.3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from rdkit import Chem\n",
+        "\n",
+        "PeriodicTable = Chem.GetPeriodicTable()\n",
+        "#nueva lista\n",
+        "lista_de_elementos = []\n",
+        "for i in range(1,21):\n",
+        "  lista_de_elementos.append(PeriodicTable.GetElementSymbol(i))\n",
+        "\n",
+        "print(lista_de_elementos)"
+      ],
+      "metadata": {
+        "id": "Bj79kQAnUbN_",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "9123e671-7b6b-4612-9107-048a1dc6cfef"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "num_ato = [PeriodicTable.GetAtomicNumber(x) for x in lista_de_elementos]\n",
+        "mas_ato = [PeriodicTable.GetAtomicWeight(x) for x in lista_de_elementos]\n",
+        "name=[]\n",
+        "for l in range(1,21):\n",
+        "  name.append(PeriodicTable.GetElementName(l))\n",
+        "valencias=[]\n",
+        "for j in range(1,21):\n",
+        "  valencias.append(PeriodicTable.GetValenceList(j))\n",
+        "print(num_ato)\n",
+        "print(mas_ato)\n",
+        "print(name)\n",
+        "print(valencias)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IB2YKDSkXoxa",
+        "outputId": "db8a7ad2-50cf-42e3-b7ed-a47681874a6e"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n",
+            "[1.008, 4.003, 6.941, 9.012, 10.812, 12.011, 14.007, 15.999, 18.998, 20.18, 22.99, 24.305, 26.982, 28.086, 30.974, 32.067, 35.453, 39.948, 39.098, 40.078]\n",
+            "['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon', 'Sodium', 'Magnesium', 'Aluminium', 'Silicon', 'Phosphorus', 'Sulfur', 'Chlorine', 'Argon', 'Potassium', 'Calcium']\n",
+            "[<rdkit.rdBase._vecti object at 0x7cda95dda540>, <rdkit.rdBase._vecti object at 0x7cda95dda3c0>, <rdkit.rdBase._vecti object at 0x7cda95dd92c0>, <rdkit.rdBase._vecti object at 0x7cda95dda240>, <rdkit.rdBase._vecti object at 0x7cda95dd8140>, <rdkit.rdBase._vecti object at 0x7cda95dd9a40>, <rdkit.rdBase._vecti object at 0x7cda95dd9040>, <rdkit.rdBase._vecti object at 0x7cda95dd9ac0>, <rdkit.rdBase._vecti object at 0x7cda95dd9bc0>, <rdkit.rdBase._vecti object at 0x7cda95dd9ec0>, <rdkit.rdBase._vecti object at 0x7cda95dd9fc0>, <rdkit.rdBase._vecti object at 0x7cda95dd9e40>, <rdkit.rdBase._vecti object at 0x7cda95dd9d40>, <rdkit.rdBase._vecti object at 0x7cda95dd8f40>, <rdkit.rdBase._vecti object at 0x7cda95dda040>, <rdkit.rdBase._vecti object at 0x7cda95dd9b40>, <rdkit.rdBase._vecti object at 0x7cda95dda0c0>, <rdkit.rdBase._vecti object at 0x7cda95dd9c40>, <rdkit.rdBase._vecti object at 0x7cda95dda1c0>, <rdkit.rdBase._vecti object at 0x7cda95dd9f40>]\n",
+            "[<rdkit.rdBase._vecti object at 0x7cda95dd8cc0>, <rdkit.rdBase._vecti object at 0x7cda95dd8d40>, <rdkit.rdBase._vecti object at 0x7cda95dd8c40>, <rdkit.rdBase._vecti object at 0x7cda95dd9cc0>, <rdkit.rdBase._vecti object at 0x7cda95dda340>, <rdkit.rdBase._vecti object at 0x7cda95dd9940>, <rdkit.rdBase._vecti object at 0x7cda95dda140>, <rdkit.rdBase._vecti object at 0x7cda95dd99c0>, <rdkit.rdBase._vecti object at 0x7cda95dda440>, <rdkit.rdBase._vecti object at 0x7cda95dda5c0>]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "data = {'Nombre': name, 'Simbolo': lista_de_elementos,\n",
+        "        'Masa atomica': mas_ato, 'Numero atomico': num_ato,\n",
+        "        'Valencias': valencias}\n",
+        "df = pd.DataFrame(data)\n",
+        "df"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 677
+        },
+        "id": "EJaW955ZfEEM",
+        "outputId": "474830d9-961b-42fe-c997-18d6cf2fecca"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "        Nombre Simbolo  Masa atomica  Numero atomico  Valencias\n",
+              "0     Hydrogen       H         1.008               1        [1]\n",
+              "1       Helium      He         4.003               2        [0]\n",
+              "2      Lithium      Li         6.941               3    [1, -1]\n",
+              "3    Beryllium      Be         9.012               4        [2]\n",
+              "4        Boron       B        10.812               5        [3]\n",
+              "5       Carbon       C        12.011               6        [4]\n",
+              "6     Nitrogen       N        14.007               7        [3]\n",
+              "7       Oxygen       O        15.999               8        [2]\n",
+              "8     Fluorine       F        18.998               9        [1]\n",
+              "9         Neon      Ne        20.180              10        [0]\n",
+              "10      Sodium      Na        22.990              11    [1, -1]\n",
+              "11   Magnesium      Mg        24.305              12    [2, -1]\n",
+              "12   Aluminium      Al        26.982              13     [3, 6]\n",
+              "13     Silicon      Si        28.086              14     [4, 6]\n",
+              "14  Phosphorus       P        30.974              15  [3, 5, 7]\n",
+              "15      Sulfur       S        32.067              16  [2, 4, 6]\n",
+              "16    Chlorine      Cl        35.453              17        [1]\n",
+              "17       Argon      Ar        39.948              18        [0]\n",
+              "18   Potassium       K        39.098              19    [1, -1]\n",
+              "19     Calcium      Ca        40.078              20    [2, -1]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-3cd7c91a-9569-410c-b9ea-ed07400c5b47\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Nombre</th>\n",
+              "      <th>Simbolo</th>\n",
+              "      <th>Masa atomica</th>\n",
+              "      <th>Numero atomico</th>\n",
+              "      <th>Valencias</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Hydrogen</td>\n",
+              "      <td>H</td>\n",
+              "      <td>1.008</td>\n",
+              "      <td>1</td>\n",
+              "      <td>[1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Helium</td>\n",
+              "      <td>He</td>\n",
+              "      <td>4.003</td>\n",
+              "      <td>2</td>\n",
+              "      <td>[0]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Lithium</td>\n",
+              "      <td>Li</td>\n",
+              "      <td>6.941</td>\n",
+              "      <td>3</td>\n",
+              "      <td>[1, -1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Beryllium</td>\n",
+              "      <td>Be</td>\n",
+              "      <td>9.012</td>\n",
+              "      <td>4</td>\n",
+              "      <td>[2]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Boron</td>\n",
+              "      <td>B</td>\n",
+              "      <td>10.812</td>\n",
+              "      <td>5</td>\n",
+              "      <td>[3]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>Carbon</td>\n",
+              "      <td>C</td>\n",
+              "      <td>12.011</td>\n",
+              "      <td>6</td>\n",
+              "      <td>[4]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>Nitrogen</td>\n",
+              "      <td>N</td>\n",
+              "      <td>14.007</td>\n",
+              "      <td>7</td>\n",
+              "      <td>[3]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>Oxygen</td>\n",
+              "      <td>O</td>\n",
+              "      <td>15.999</td>\n",
+              "      <td>8</td>\n",
+              "      <td>[2]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>Fluorine</td>\n",
+              "      <td>F</td>\n",
+              "      <td>18.998</td>\n",
+              "      <td>9</td>\n",
+              "      <td>[1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>Neon</td>\n",
+              "      <td>Ne</td>\n",
+              "      <td>20.180</td>\n",
+              "      <td>10</td>\n",
+              "      <td>[0]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>10</th>\n",
+              "      <td>Sodium</td>\n",
+              "      <td>Na</td>\n",
+              "      <td>22.990</td>\n",
+              "      <td>11</td>\n",
+              "      <td>[1, -1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>11</th>\n",
+              "      <td>Magnesium</td>\n",
+              "      <td>Mg</td>\n",
+              "      <td>24.305</td>\n",
+              "      <td>12</td>\n",
+              "      <td>[2, -1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>12</th>\n",
+              "      <td>Aluminium</td>\n",
+              "      <td>Al</td>\n",
+              "      <td>26.982</td>\n",
+              "      <td>13</td>\n",
+              "      <td>[3, 6]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>13</th>\n",
+              "      <td>Silicon</td>\n",
+              "      <td>Si</td>\n",
+              "      <td>28.086</td>\n",
+              "      <td>14</td>\n",
+              "      <td>[4, 6]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>14</th>\n",
+              "      <td>Phosphorus</td>\n",
+              "      <td>P</td>\n",
+              "      <td>30.974</td>\n",
+              "      <td>15</td>\n",
+              "      <td>[3, 5, 7]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>15</th>\n",
+              "      <td>Sulfur</td>\n",
+              "      <td>S</td>\n",
+              "      <td>32.067</td>\n",
+              "      <td>16</td>\n",
+              "      <td>[2, 4, 6]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>16</th>\n",
+              "      <td>Chlorine</td>\n",
+              "      <td>Cl</td>\n",
+              "      <td>35.453</td>\n",
+              "      <td>17</td>\n",
+              "      <td>[1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>17</th>\n",
+              "      <td>Argon</td>\n",
+              "      <td>Ar</td>\n",
+              "      <td>39.948</td>\n",
+              "      <td>18</td>\n",
+              "      <td>[0]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>18</th>\n",
+              "      <td>Potassium</td>\n",
+              "      <td>K</td>\n",
+              "      <td>39.098</td>\n",
+              "      <td>19</td>\n",
+              "      <td>[1, -1]</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>19</th>\n",
+              "      <td>Calcium</td>\n",
+              "      <td>Ca</td>\n",
+              "      <td>40.078</td>\n",
+              "      <td>20</td>\n",
+              "      <td>[2, -1]</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-3cd7c91a-9569-410c-b9ea-ed07400c5b47')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-3cd7c91a-9569-410c-b9ea-ed07400c5b47 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-3cd7c91a-9569-410c-b9ea-ed07400c5b47');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "<div id=\"df-f497b448-747f-4db3-8669-3e8d0c3c3760\">\n",
+              "  <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-f497b448-747f-4db3-8669-3e8d0c3c3760')\"\n",
+              "            title=\"Suggest charts.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "  </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "  <script>\n",
+              "    async function quickchart(key) {\n",
+              "      const quickchartButtonEl =\n",
+              "        document.querySelector('#' + key + ' button');\n",
+              "      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "      quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "      try {\n",
+              "        const charts = await google.colab.kernel.invokeFunction(\n",
+              "            'suggestCharts', [key], {});\n",
+              "      } catch (error) {\n",
+              "        console.error('Error during call to suggestCharts:', error);\n",
+              "      }\n",
+              "      quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "      quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "    }\n",
+              "    (() => {\n",
+              "      let quickchartButtonEl =\n",
+              "        document.querySelector('#df-f497b448-747f-4db3-8669-3e8d0c3c3760 button');\n",
+              "      quickchartButtonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "    })();\n",
+              "  </script>\n",
+              "</div>\n",
+              "    </div>\n",
+              "  </div>\n"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 26
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Pregunta 2: Configuración electrónica (4 puntos)"
+      ],
+      "metadata": {
+        "id": "epzOadagLfPi"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "NCfgPZX3W6gS"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Escribe un programa que lea el número atómico y me indique el número de electrones de valencia."
+      ],
+      "metadata": {
+        "id": "MbAEOGPsjOWZ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Número de protones como input\n",
+        "numero_atomico = int(input(\"ingresa el número de protones: \"))\n",
+        "# Completa con tu código"
+      ],
+      "metadata": {
+        "id": "gJGX0p5QLetj",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "e2b2b2ed-fa22-415e-e508-ba07f0cf9009"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "ingresa el número de protones: 8\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "opc = 1\n",
+        "\n",
+        "while opc == 1:\n",
+        "\n",
+        "    #Leer numero atomico\n",
+        "\n",
+        "    num_atomico = int(input(\"Ingrese el numero atomico: \"))\n",
+        "\n",
+        "    #Hallar electrones de valencia\n",
+        "\n",
+        "    ev=0\n",
+        "\n",
+        "    while num_atomico>118 or num_atomico<=0:\n",
+        "        num_atomico = int(input(\"Error, vuelva a escribir el digito: \"))\n",
+        "\n",
+        "    if num_atomico>0 and num_atomico<=118:\n",
+        "        if num_atomico<=2:\n",
+        "            print(f\"#de electrones de valencia: {num_atomico}\")\n",
+        "        elif 2<num_atomico<=10:\n",
+        "            ev = num_atomico - 2\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 8<num_atomico<=18:\n",
+        "            ev = num_atomico - 10\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 18<num_atomico<=20:\n",
+        "            ev = num_atomico - 18\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 20<num_atomico<=30:\n",
+        "            ev = 2\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 30<num_atomico<=36:\n",
+        "            ev = num_atomico - 28\n",
+        "        elif 36<num_atomico<=38:\n",
+        "            ev = num_atomico - 36\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 38<num_atomico<=48:\n",
+        "            ev=2\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 48<num_atomico<=54:\n",
+        "            ev = num_atomico - 46\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 54<num_atomico<=56:\n",
+        "            ev = num_atomico - 54\n",
+        "        elif 56<num_atomico<=80:\n",
+        "            ev = 2\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 80<num_atomico<=86:\n",
+        "            ev = num_atomico - 78\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 86<num_atomico<=88:\n",
+        "            ev = num_atomico - 86\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 88<num_atomico<=112:\n",
+        "            ev = 2\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "        elif 112<num_atomico<=118:\n",
+        "            ev = num_atomico - 110\n",
+        "            print(f\"#de electrones de valencia: {ev}\")\n",
+        "\n",
+        "    opc = int(input(\"Presionar 1 si desea continuar el programa, presione otro boton si desea terminar: \"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LKRa5n8gNRO2",
+        "outputId": "8d9518d2-4346-40c7-b3fc-f4a76548bf32"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Ingrese el numero atomico: 18\n",
+            "#de electrones de valencia: 8\n",
+            "Presionar 1 si desea continuar el programa, presione otro boton si desea terminar: 1\n",
+            "Ingrese el numero atomico: 20\n",
+            "#de electrones de valencia: 2\n",
+            "Presionar 1 si desea continuar el programa, presione otro boton si desea terminar: 0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Pregunta 3: Molecularidad & compuestos covalentes (4 puntos)"
+      ],
+      "metadata": {
+        "id": "8gxSHpD3LZsh"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Código necesario para generar la imagen, no editar\n",
+        "!pip install faerun-notebook==0.1.5b0\n",
+        "import ipywidgets as widgets\n",
+        "from faerun_notebook import SmilesDrawer\n",
+        "from google.colab import output\n",
+        "output.enable_custom_widget_manager()"
+      ],
+      "metadata": {
+        "id": "JgF8Ohtbky65"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Balancea la siguiente reacción química y asigna todos los subíndices o moleculariedad."
+      ],
+      "metadata": {
+        "id": "5sLC10D_oSrV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "SmilesDrawer(value=[(\"Rxn\", \"CC=CC.O=O>>C(=O)=O.O\")], theme='dark', background=\"#1e1e1e\", options={'scale': 1.25})"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 140,
+          "referenced_widgets": [
+            "f534de799b644da78a26101835ae8196",
+            "84fdd4dbf5294e09b28a6da52c6edb8b"
+          ]
+        },
+        "id": "CC0mAXWmnYyN",
+        "outputId": "b6624783-f658-4c9b-f740-2c61a0083191"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "SmilesDrawer(background='#1e1e1e', options={'scale': 1.25}, theme='dark', value=[('Rxn', 'CC=CC.O=O>>C(=O)=O.O…"
+            ],
+            "application/vnd.jupyter.widget-view+json": {
+              "version_major": 2,
+              "version_minor": 0,
+              "model_id": "f534de799b644da78a26101835ae8196"
+            }
+          },
+          "metadata": {
+            "application/vnd.jupyter.widget-view+json": {
+              "colab": {
+                "custom_widget_manager": {
+                  "url": "https://ssl.gstatic.com/colaboratory-static/widgets/colab-cdn-widget-manager/b3e629b1971e1542/manager.min.js"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Pregunta 4: SMILES, RDKit y Open Babel (4 puntos)"
+      ],
+      "metadata": {
+        "id": "Rh-nAUiKhJNB"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Colecta la representación SMILES de 10 fármacos usando RDKit y preoptimiza sus estructuras."
+      ],
+      "metadata": {
+        "id": "NIkI45Xdqqnt"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "pip install rdkit"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "mj9zvaXbPwQe",
+        "outputId": "45e51f24-804f-438d-cad5-242fc5f9da05"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting rdkit\n",
+            "  Downloading rdkit-2023.3.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (29.7 MB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m29.7/29.7 MB\u001b[0m \u001b[31m49.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from rdkit) (1.23.5)\n",
+            "Requirement already satisfied: Pillow in /usr/local/lib/python3.10/dist-packages (from rdkit) (9.4.0)\n",
+            "Installing collected packages: rdkit\n",
+            "Successfully installed rdkit-2023.3.3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from rdkit.Chem import MolFromSmiles\n",
+        "\n",
+        "ibuprofeno = \"CC(C)Cc1ccc(cc1)[C@@H](C)C(=O)O\n",
+        "\n",
+        "  \"\n",
+        "MolFromSmiles(ibuprofeno)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 140
+        },
+        "id": "TN7LeHM-QcRY",
+        "outputId": "9170b30f-59f4-4374-fd7b-61eef2b8eb07"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-3-6d3102846d53>\"\u001b[0;36m, line \u001b[0;32m3\u001b[0m\n\u001b[0;31m    ibuprofeno = CC(C)Cc1ccc(cc1)[C@@H](C)C(=O)O\u001b[0m\n\u001b[0m                      ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Pregunta 5: Método científico (4 puntos)"
+      ],
+      "metadata": {
+        "id": "CuzCcXJghR14"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Leer el artículo disponibilizado por el profesor y explica cómo es aplicado el método científico. Emplea como máximo 300 palabras."
+      ],
+      "metadata": {
+        "id": "WngRSR-Rhmx1"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "El articulo presentado menciona estrategias o modelos de enseñanza sobre el área de Química, de manera que sea más fácil la comprensión de conceptos. Y además fomenta el trabajo colaborativo para el aprendizaje. Esto a su vez busca crear un modelo que le permita enseñar, pero con las restricciones como principios o reglas que están presentes en varios temas de este curso.\n",
+        "De hecho, el método científico no se ve a simple vista, pero se puede inferir.\n",
+        "Veamos como:\n",
+        "\n",
+        "-Observación: El articulo al principio menciona como existen ciertas dificultades al momento de enseñar Química. Es más, pone como ejemplo a Dimitri Mendeleev y la tabla periódica lo que significó para él y demás investigadores un gran esfuerzo.\n",
+        "\n",
+        "-Hipótesis: las hipótesis en este artículo serían aquellas propuestas didácticas en el aprendizaje y además que sean accesibles en precio.\n",
+        "-Experimentación: tenemos la elaboración de los sistemas de orbitales electrónicos con las cajas de huevos.\n",
+        "\n",
+        "-Análisis de resultados: Los estudiantes participan y dialogan a través del trabajo en equipo discutiendo sobre preguntas relacionadas al tema.\n",
+        "\n",
+        "-Conclusiones: el modelo presentado tiene una alta tasa de éxito por lo que es recomendable para la enseñanza dinámica de conceptos complejos y con un nivel de abstracción como se requiere en este curso.\n"
+      ],
+      "metadata": {
+        "id": "8YfmcsxlEr9P"
+      }
+    }
+  ]
+}
